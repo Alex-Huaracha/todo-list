@@ -6,6 +6,94 @@
     <title>ToDo List</title>
   </head>
   <body>
-    <script src="index.js"></script>
+    <div class="app-container">
+      <header class="app-header">
+        <nav class="app-nav">
+          <h1 class="app-title">Todo-List</h1>
+          <h2 class="nav-section-title">Home</h2>
+          <ul class="nav-list" id="primary-list">
+            <li class="nav-item">
+              <a class="nav-item-link" href="#">
+                <svg width="24" height="24">
+                  <use href="#icon-archive"></use>
+                </svg>
+                General</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-item-link" href="#"
+                ><svg width="24" height="24">
+                  <use href="#icon-star"></use></svg
+                >Today</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-item-link" href="#"
+                ><svg width="24" height="24">
+                  <use href="#icon-calendar"></use></svg
+                >Upcoming</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-item-link" href="#"
+                ><svg width="24" height="24">
+                  <use href="#icon-file"></use></svg
+                >Completed</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-item-link" href="#"
+                ><svg width="24" height="24">
+                  <use href="#icon-trash"></use></svg
+                >Trash</a
+              >
+            </li>
+          </ul>
+          <h2 class="nav-section-title">Projects</h2>
+          <ul class="nav-list" id="projects-list"></ul>
+          <button class="nav-btn">
+            <svg width="24" height="24">
+              <use href="#icon-folder"></use></svg
+            >Create Project
+          </button>
+        </nav>
+      </header>
+
+      <main class="app-main">
+        <header class="mobile-header">
+          <button class="mobile-nav-btn">
+            <svg width="24" height="24">
+              <use href="#icon-menu"></use>
+            </svg>
+          </button>
+          <h1 class="mobile-nav-title">Todo-List</h1>
+        </header>
+        <div class="main-content"></div>
+      </main>
+
+      <div class="modal display-none">
+        <form class="modal-form">
+          <fieldset class="modal-form-fieldset"></fieldset>
+          <button class="modal-form-submit">Submit</button>
+          <button class="modal-form-close">
+            <svg width="24" height="24">
+              <use href="#icon-close"></use>
+            </svg>
+          </button>
+        </form>
+      </div>
+
+      <footer class="app-footer">
+        <a
+          target="_blank"
+          class="footer-link"
+          href="https://github.com/Alex-Huaracha"
+          >By Alex
+          <svg width="24" height="24">
+            <use href="#icon-github"></use>
+          </svg>
+        </a>
+      </footer>
+    </div>
   </body>
 </html>

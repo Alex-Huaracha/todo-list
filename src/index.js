@@ -1,6 +1,16 @@
+import './reset.css';
+import './style.css';
+
 import Todo from './modules/todo';
 import Project from './modules/project';
 import ProjectManager from './modules/projectManager';
+
+// Load SVG icons and insert them into the DOM
+fetch('assets/icons.svg')
+  .then((res) => res.text())
+  .then((svg) => {
+    document.body.insertAdjacentHTML('afterbegin', svg);
+  });
 
 const manager = new ProjectManager();
 
