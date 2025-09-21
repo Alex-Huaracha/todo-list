@@ -1,5 +1,6 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
   entry: {
@@ -9,6 +10,9 @@ module.exports = {
     new HtmlWebpackPlugin({
       title: 'Todo-List',
       template: './src/template.html',
+    }),
+    new CopyWebpackPlugin({
+      patterns: [{ from: 'src/assets', to: 'assets' }],
     }),
   ],
   output: {
