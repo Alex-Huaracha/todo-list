@@ -1,4 +1,6 @@
-import { Todo, Project, ProjectManager } from './modules/todo';
+import Todo from './modules/todo';
+import Project from './modules/project';
+import ProjectManager from './modules/projectManager';
 
 const manager = new ProjectManager();
 
