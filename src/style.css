@@ -1,52 +1,20 @@
 :root {
-  /* Font size */
-  --fs-300: 0.7rem;
-  --fs-400: 1rem;
-  --fs-500: 1.3rem;
-  --fs-700: 2rem;
-
-  /* Font Weight */
-  --fw-300: 300;
-  --fw-400: 400;
-  --fw-700: 700;
-
-  --nav: oklch(0.95 0.03 60 / 0.8);
-  --nav-foreground: oklch(0.15 0.05 25);
-  --content: oklch(0.93 0.04 58 / 0.7);
-
-  --font-clr-primary: hsl(177, 100%, 8%);
-  --font-clr-btn: hsl(177, 100%, 8%);
-
-  --clr-bg-accent: hsl(0 0% 100% / 0.5);
-  --clr-bg-secondary: hsl(0 0% 100% / 0.1);
-  --clr-bg-secondary-xl: hsl(0 0% 100% / 0.3);
   --clr-bg-primary: linear-gradient(to bottom right, #072083, #f85b1a, #7f2c09);
-
-  --clr-btn-primary: hsl(0 0% 0% / 0.15);
-  --clr-btn-accent: hsl(0 0% 0% / 0.3);
-  --clr-btn-secondary: hsl(0 0% 100% / 1);
-  --clr-btn-focus: hsl(176 56% 61%);
-  --clr-btn-checkbox: hsl(120 72% 44%);
-
-  --clr-form-bg: hsl(0 0% 0% / 0.15);
-  --clr-form-accent: hsl(0 0% 0% / 0.3);
-
-  --clr-important: hsl(0 100% 50% / 0.35);
-
-  --shadow-primary: 0 0 10px hsl(0 0% 0% / 0.2);
-  --shadow-secondary: 0 0 10px hsl(0 0% 0% / 0.1);
 }
 
 body {
   background: var(--clr-bg-primary);
-  font-size: var(--fs-400);
-  font-weight: var(--fw-400);
   font-family: 'Roboto', sans-serif;
-  color: var(--font-clr-primary);
   min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.icon {
+  width: 1.2rem;
+  height: 1.2rem;
+  fill: currentColor;
 }
 
 .container {

@@ -7,98 +7,55 @@
   </head>
   <body>
     <div class="container">
-      <header class="header">
-        <nav class="header-nav">
-          <h1 class="header-title">Todo-List</h1>
-          <h2 class="nav-title">Home</h2>
-          <ul class="nav-list" id="primary-list">
-            <li class="nav-item">
-              <a class="nav-item-link" href="#">
-                <svg width="24" height="24">
-                  <use href="#icon-archive"></use>
-                </svg>
-                General
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-item-link" href="#"
-                ><svg width="24" height="24">
-                  <use href="#icon-today"></use>
-                </svg>
-                Today
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-item-link" href="#"
-                ><svg width="24" height="24">
-                  <use href="#icon-upcoming"></use>
-                </svg>
-                Upcoming
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-item-link" href="#"
-                ><svg width="24" height="24">
-                  <use href="#icon-circle-check-big"></use>
-                </svg>
-                Completed
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-item-link" href="#"
-                ><svg width="24" height="24">
-                  <use href="#icon-trash"></use>
-                </svg>
-                Trash
-              </a>
-            </li>
-          </ul>
-          <h2 class="nav-title">Projects</h2>
-          <ul class="nav-list" id="projects-list"></ul>
+      <!-- Sidebar -->
+      <aside>
+        <h2>ToDo List</h2>
+        <nav>
           <button class="nav-btn">
-            <svg width="24" height="24">
-              <use href="#icon-folder"></use>
+            <svg class="icon">
+              <use href="#icon-list-todo"></use>
             </svg>
-            Create Project
+            Today
+          </button>
+          <button class="nav-btn">
+            <svg class="icon">
+              <use href="#icon-calendar"></use>
+            </svg>
+            Upcoming
+          </button>
+          <button class="nav-btn">
+            <svg class="icon">
+              <use href="#icon-circle-check-big"></use>
+            </svg>
+            Completed
           </button>
         </nav>
-      </header>
-
-      <main class="main">
-        <header class="mobile-header">
-          <button class="mobile-nav-btn">
-            <svg width="24" height="24">
-              <use href="#icon-menu"></use>
-            </svg>
-          </button>
-          <h1 class="mobile-nav-title">Todo-List</h1>
-        </header>
-        <div class="main-content"></div>
-      </main>
-
-      <div class="modal display-none">
-        <form class="modal-form">
-          <fieldset class="modal-form-fieldset"></fieldset>
-          <button class="modal-form-submit">Submit</button>
-          <button class="modal-form-close">
-            <svg width="24" height="24">
-              <use href="#icon-close"></use>
-            </svg>
-          </button>
-        </form>
-      </div>
-
-      <footer class="app-footer">
-        <a
-          target="_blank"
-          class="footer-link"
-          href="https://github.com/Alex-Huaracha"
-          >By Alex
-          <svg width="24" height="24">
-            <use href="#icon-github"></use>
-          </svg>
-        </a>
-      </footer>
+        <section class="projects-section">
+          <h2>Projects</h2>
+          <nav class="projects-nav">
+            <button class="nav-btn">
+              <svg class="icon">
+                <use href="#icon-project"></use>
+              </svg>
+              Project 1
+            </button>
+            <button class="nav-btn">
+              <svg class="icon">
+                <use href="#icon-project"></use>
+              </svg>
+              Project 2
+            </button>
+            <button class="add-project-btn">
+              <svg class="icon">
+                <use href="#icon-plus"></use>
+              </svg>
+              Add Project
+            </button>
+          </nav>
+        </section>
+      </aside>
+      <!-- Content -->
+      <main></main>
     </div>
   </body>
 </html>
