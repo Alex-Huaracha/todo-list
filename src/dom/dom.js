@@ -1,3 +1,5 @@
+import { format, parseISO } from 'date-fns';
+
 export function renderProjects(manager) {
   const projectsNav = document.querySelector('.projects-nav');
   projectsNav.innerHTML = '';
@@ -23,7 +25,17 @@ export function renderTodos(project) {
   project.getAllTodos().forEach((todo) => {
     const div = document.createElement('div');
     div.className = 'todo-item';
-    div.textContent = `${todo.title} - ${todo.dueDate}`;
+
+    let formattedDate = '';
+    if (todo.dueDate) {
+      try {
+        formattedDate = format(parseISO(todo.dueDate), 'dd/MM/yyyy');
+      } catch (error) {
+        formattedDate = todo.dueDate;
+      }
+    }
+
+    div.textContent = `${todo.title} - ${formattedDate}`;
 
     const actions = document.createElement('span');
     actions.className = 'todo-actions';
