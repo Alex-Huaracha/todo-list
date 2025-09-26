@@ -26,7 +26,7 @@ body {
 }
 
 .container {
-  width: 65vw;
+  width: 55vw;
   height: 75vh;
   display: grid;
   grid-template-columns: max-content 1fr;
@@ -38,7 +38,7 @@ body {
 }
 
 .glass-card {
-  background: var(--sidebar); /* Ya usas oklch con alpha, perfecto */
+  background: var(--sidebar);
   backdrop-filter: blur(16px) saturate(180%);
   -webkit-backdrop-filter: blur(16px) saturate(180%);
   border: 1px solid var(--sidebar-border);
@@ -166,12 +166,16 @@ main {
 }
 
 .todo-item {
-  border: 2px solid tomato;
-  border-radius: 8px;
+  border-radius: 12px;
   padding: 1rem;
   margin-bottom: 1rem;
   display: flex;
   gap: 0.5rem;
+  /* Glass efect */
+  background: rgba(13, 0, 255, 0.139);
+  backdrop-filter: blur(16px) saturate(180%);
+
+  border: 1px solid var(--sidebar-border);
 }
 
 .todo-actions {
@@ -185,10 +189,16 @@ main {
   border: none;
   cursor: pointer;
   padding: 0.3rem;
-  border-radius: 4px;
 }
 
-.todo-actions > button:hover {
-  background-color: var(--bg-hover);
-  color: var(--text-hover);
+.todo-actions .icon {
+  width: 22px;
+  height: 22px;
+}
+
+.todo-actions > button:hover .icon {
+  border-bottom: 2px solid #ff6f00;
+  color: whitesmoke;
+  width: 27px;
+  height: 27px;
 }
