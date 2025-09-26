@@ -29,8 +29,11 @@ class ProjectManager {
     this.save();
   }
 
-  listProjects() {
-    return Object.keys(this.projects);
+  getAllProjects() {
+    return Object.entries(this.projects).map(([name, project]) => ({
+      name,
+      project,
+    }));
   }
 
   save() {
