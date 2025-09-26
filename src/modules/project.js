@@ -1,7 +1,9 @@
 import Todo from './todo.js';
 
 class Project {
-  constructor() {
+  constructor(name, id = crypto.randomUUID()) {
+    this.id = id;
+    this.name = name;
     this.todos = [];
   }
 
@@ -21,8 +23,8 @@ class Project {
     }
   }
 
-  removeTodo(index) {
-    this.todos.splice(index, 1);
+  removeTodoById(id) {
+    this.todos = this.todos.filter((todo) => todo.id !== id);
   }
 
   getAllTodos() {
