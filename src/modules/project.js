@@ -26,7 +26,6 @@ class Project {
   }
 
   getAllTodos() {
-    console.log('this is all todos:\n', JSON.stringify(this.todos, null, 2));
     return this.todos;
   }
 
