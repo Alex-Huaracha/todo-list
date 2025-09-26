@@ -4,7 +4,8 @@ import './style.css';
 import Todo from './modules/todo';
 import Project from './modules/project';
 import ProjectManager from './modules/projectManager';
-import { renderProjects, renderTodos } from './dom/dom.js';
+import { renderProjects } from './dom/renderProjects.js';
+import { renderTodos } from './dom/renderTodos.js';
 
 // Load SVG icons and insert them into the DOM
 fetch('assets/icons.svg')
@@ -43,24 +44,29 @@ if (defaultProject.getAllTodos().length === 0) {
   manager.save();
 }
 
-const newProject = 'Work';
-manager.createProject(newProject);
-const workProject = manager.getProject(newProject);
+if (!manager.getProject('Work')) {
+  manager.createProject('Work');
+  const workProject = manager.getProject('Work');
 
-const workTodo = new Todo(
-  'Prepare Presentation',
-  'Create slides for the upcoming meeting',
-  '2024-11-01',
-  'high'
-);
-workProject.addTodo(workTodo);
-manager.save();
-
-// To verify persistence, create a new manager instance and load data
-const newManagerInstance = new ProjectManager();
-const loadedDefaultProject = newManagerInstance.getProject('Default');
-
-const loadedWorkProject = newManagerInstance.getProject('Work');
+  const workTodo = new Todo(
+    'Prepare Presentation',
+    'Create slides for the upcoming meeting',
+    '2024-11-01',
+    true
+  );
+  workProject.addTodo(workTodo);
+  manager.save();
+}
 
 renderProjects(manager);
 renderTodos(manager.getProject('Default'));
+
+let currentProject = manager.getProject('Default');
+
+function handleDeleteTodo(todo) {
+  currentProject.removeTodoById(todo.id);
+  manager.save();
+  renderTodos(currentProject, { onDeleteTodo: handleDeleteTodo });
+}
+
+renderTodos(currentProject, { onDeleteTodo: handleDeleteTodo });
