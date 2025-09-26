@@ -24,6 +24,30 @@ export function renderTodos(project) {
     const div = document.createElement('div');
     div.className = 'todo-item';
     div.textContent = `${todo.title} - ${todo.dueDate}`;
+
+    const actions = document.createElement('span');
+    actions.className = 'todo-actions';
+
+    const editBtn = document.createElement('button');
+    editBtn.className = 'edit-todo-btn';
+    editBtn.innerHTML = `
+      <svg class="icon">
+        <use href="#icon-file-edit"></use>
+      </svg>
+    `;
+
+    const deleteBtn = document.createElement('button');
+    deleteBtn.className = 'delete-todo-btn';
+    deleteBtn.innerHTML = `
+      <svg class="icon">
+        <use href="#icon-trash"></use>
+      </svg>
+    `;
+
+    actions.appendChild(editBtn);
+    actions.appendChild(deleteBtn);
+    div.appendChild(actions);
+
     mainContent.appendChild(div);
   });
 }
