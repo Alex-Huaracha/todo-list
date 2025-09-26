@@ -4,8 +4,10 @@ class Todo {
     description,
     dueDate,
     priority = false,
-    completed = false
+    completed = false,
+    id = crypto.randomUUID()
   ) {
+    this.id = id;
     this.title = title;
     this.description = description;
     this.dueDate = dueDate;
@@ -18,6 +20,10 @@ class Todo {
     if (description !== undefined) this.description = description;
     if (dueDate !== undefined) this.dueDate = dueDate;
     if (priority !== undefined) this.priority = priority;
+  }
+
+  togglePriority() {
+    this.priority = !this.priority;
   }
 
   toggleCompletion() {
