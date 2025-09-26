@@ -1,7 +1,7 @@
 export function setupProjectEvents(manager, renderCallback) {
   function handleDeleteProject(project) {
     const confirmed = confirm(
-      `¿Estás seguro de que quieres eliminar el proyecto "${project.name}"? Esta acción no se puede deshacer.`
+      `Are you sure you want to delete the project "${project.name}"? This action cannot be undone.`
     );
 
     if (confirmed) {

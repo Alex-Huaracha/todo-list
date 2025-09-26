@@ -7,7 +7,7 @@ function projectActions(project, onEdit, onDelete) {
 
   const editBtn = createActionButton({
     className: 'edit-project-btn',
-    iconId: 'icon-file-edit',
+    iconId: 'icon-edit',
     onClick: onEdit,
   });
 
@@ -23,13 +23,19 @@ function projectActions(project, onEdit, onDelete) {
   return actions;
 }
 
-export function renderProjects(manager) {
+export function renderProjects(manager, options = {}) {
+  const { onDeleteProject, onEditProject, currentProject } = options;
   const projectsNav = document.querySelector('.projects-nav');
   projectsNav.innerHTML = '';
 
   manager.getAllProjects().forEach(({ name, project }) => {
+    const projectItem = document.createElement('div');
+    projectItem.className = 'project-item';
+
     const btn = document.createElement('button');
-    btn.className = 'nav-btn';
+    btn.className = `nav-btn ${
+      currentProject?.id === project.id ? 'active' : ''
+    }`;
     btn.innerHTML = `
       <svg class="icon"><use href="#icon-project"></use></svg>
       ${name}
@@ -38,6 +44,17 @@ export function renderProjects(manager) {
       renderTodos(project);
     });
 
-    projectsNav.appendChild(btn);
+    projectItem.appendChild(btn);
+
+    if (name !== 'Default') {
+      const actions = projectActions(
+        project,
+        () => onEditProject?.(project),
+        () => onDeleteProject?.(project)
+      );
+      projectItem.appendChild(actions);
+    }
+
+    projectsNav.appendChild(projectItem);
   });
 }
