@@ -36,12 +36,17 @@ function renderUI(currentProject = null) {
   renderProjects(manager, {
     onDeleteProject: handleDeleteProject,
     onEditProject: handleEditProject,
+    onProjectSelect: handleProjectSelect,
     currentProject: current,
   });
 
   renderTodos(current, {
     onDeleteTodo: handleDeleteTodo,
   });
+}
+
+function handleProjectSelect(project) {
+  renderUI(project);
 }
 
 // TODO: Define handleDeleteTodo function

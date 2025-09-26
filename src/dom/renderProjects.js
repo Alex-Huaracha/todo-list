@@ -1,7 +1,6 @@
-import { renderTodos } from './renderTodos.js';
 import createActionButton from './utils.js';
 
-function projectActions(project, onEdit, onDelete) {
+function projectActions(onEdit, onDelete) {
   const actions = document.createElement('span');
   actions.className = 'project-actions';
 
@@ -24,7 +23,8 @@ function projectActions(project, onEdit, onDelete) {
 }
 
 export function renderProjects(manager, options = {}) {
-  const { onDeleteProject, onEditProject, currentProject } = options;
+  const { onDeleteProject, onEditProject, currentProject, onProjectSelect } =
+    options;
   const projectsNav = document.querySelector('.projects-nav');
   projectsNav.innerHTML = '';
 
@@ -41,7 +41,7 @@ export function renderProjects(manager, options = {}) {
       ${name}
     `;
     btn.addEventListener('click', () => {
-      renderTodos(project);
+      onProjectSelect?.(project);
     });
 
     projectItem.appendChild(btn);

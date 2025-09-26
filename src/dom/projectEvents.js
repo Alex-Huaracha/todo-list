@@ -7,7 +7,7 @@ export function setupProjectEvents(manager, renderCallback) {
     if (confirmed) {
       const success = manager.deleteProjectById(project.id);
       if (success) {
-        renderCallback(manager.getCurrentProject());
+        renderCallback();
       }
     }
   }
@@ -21,11 +21,12 @@ export function setupProjectEvents(manager, renderCallback) {
         );
         return;
       }
-      // Rename the project in the manager's projects object
+
       delete manager.projects[project.name];
       project.name = newName;
       manager.projects[newName] = project;
       manager.save();
+
       renderCallback(project);
     }
   }
