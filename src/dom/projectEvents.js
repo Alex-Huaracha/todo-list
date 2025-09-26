@@ -13,7 +13,21 @@ export function setupProjectEvents(manager, renderCallback) {
   }
 
   function handleEditProject(project) {
-    console.log('Edit project:', project.name);
+    const newName = prompt('Enter the new project name:', project.name);
+    if (newName && newName.trim() !== '' && newName !== project.name) {
+      if (manager.projects[newName]) {
+        alert(
+          'A project with this name already exists. Please choose a different name.'
+        );
+        return;
+      }
+      // Rename the project in the manager's projects object
+      delete manager.projects[project.name];
+      project.name = newName;
+      manager.projects[newName] = project;
+      manager.save();
+      renderCallback(project);
+    }
   }
 
   return {
