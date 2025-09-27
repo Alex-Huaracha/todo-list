@@ -123,3 +123,5 @@ export function renderTodos(project, options = {}) {
     mainContent.appendChild(todoItem);
   });
 }
+
+export { createTodoItem };

@@ -5,6 +5,7 @@ import ProjectManager from './modules/projectManager';
 import Todo from './modules/todo';
 import { renderTodos } from './dom/todos.js';
 import { seedDefaultData } from './modules/seedData.js';
+import { createTodoItem } from './dom/todos.js';
 
 import { renderProjects, setupProjectModal } from './dom/projects.js';
 
@@ -125,7 +126,93 @@ function renderUI(currentProject = null) {
   });
 }
 
+// ==================== FILTER HANDLERS ====================
+function handleTodayFilter() {
+  const currentProject = manager.getCurrentProject();
+  const today = new Date().toISOString().split('T')[0]; // YYYY-MM-DD format
+
+  const todayTodos = currentProject
+    .getAllTodos()
+    .filter((todo) => todo.dueDate === today);
+
+  renderFilteredTodos(todayTodos, 'Today');
+  updateActiveFilter('today');
+}
+
+function handleUpcomingFilter() {
+  const currentProject = manager.getCurrentProject();
+  const today = new Date();
+
+  const upcomingTodos = currentProject.getAllTodos().filter((todo) => {
+    if (!todo.dueDate) return false;
+    const todoDate = new Date(todo.dueDate);
+    return todoDate > today;
+  });
+
+  renderFilteredTodos(upcomingTodos, 'Upcoming');
+  updateActiveFilter('upcoming');
+}
+
+function handleCompletedFilter() {
+  const currentProject = manager.getCurrentProject();
+  const completedTodos = currentProject.getCompletedTodos();
+
+  renderFilteredTodos(completedTodos, 'Completed');
+  updateActiveFilter('completed');
+}
+
+function handleAllTodos() {
+  renderUI();
+  updateActiveFilter('all');
+}
+
+function updateActiveFilter(activeFilter) {
+  // Remove active class from all nav buttons
+  document.querySelectorAll('.nav-btn').forEach((btn) => {
+    btn.classList.remove('active');
+  });
+
+  // Add active class to current filter
+  const filterBtn = document.querySelector(`[data-filter="${activeFilter}"]`);
+  if (filterBtn) {
+    filterBtn.classList.add('active');
+  }
+}
+
+function renderFilteredTodos(todos, filterName) {
+  const mainContent = document.querySelector('.main-content');
+  mainContent.innerHTML = '';
+
+  if (todos.length === 0) {
+    mainContent.innerHTML = `<p class="no-todos">No ${filterName.toLowerCase()} todos.</p>`;
+    return;
+  }
+
+  todos.forEach((todo) => {
+    const todoItem = createTodoItem(todo, {
+      onTogglePriority: handleTogglePriority,
+      onEditTodo: handleEditTodo,
+      onDeleteTodo: handleDeleteTodo,
+    });
+    mainContent.appendChild(todoItem);
+  });
+}
+
 // ==================== SETUP ====================
+function setupNavigation() {
+  // Today button
+  const todayBtn = document.querySelector('[data-filter="today"]');
+  todayBtn?.addEventListener('click', handleTodayFilter);
+
+  // Upcoming button
+  const upcomingBtn = document.querySelector('[data-filter="upcoming"]');
+  upcomingBtn?.addEventListener('click', handleUpcomingFilter);
+
+  // Completed button
+  const completedBtn = document.querySelector('[data-filter="completed"]');
+  completedBtn?.addEventListener('click', handleCompletedFilter);
+}
+
 function setupTodoForm() {
   const addTodoBtn = document.querySelector('.add-todo-btn');
   const addTodoInput = document.querySelector('.add-todo-input');
@@ -144,6 +231,7 @@ function setupTodoForm() {
   });
 }
 
+setupNavigation(); // ← Agregar esta línea
 setupTodoForm();
 
 renderUI();

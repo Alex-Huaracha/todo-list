@@ -27,6 +27,23 @@ export function seedDefaultData(manager) {
         false
       )
     );
+    defaultProject.addTodo(
+      new Todo(
+        'Write Tests',
+        'Implement unit tests for the application',
+        '2025-10-10',
+        false
+      )
+    );
+    defaultProject.addTodo(
+      new Todo(
+        'Troubleshoot Bugs',
+        'Implement unit tests for the application',
+        // Today like '2025-10-10'
+        new Date().toISOString().split('T')[0],
+        false
+      )
+    );
     manager.save();
   }
 
