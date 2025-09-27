@@ -46,17 +46,26 @@
       <!-- Content -->
       <main>
         <section class="add-todo-section">
-          <input
-            type="text"
-            class="add-todo-input"
-            placeholder="Add new todo..."
-          />
-          <button class="add-todo-btn">
-            <svg class="icon">
-              <use href="#icon-plus"></use>
-            </svg>
-            Add
-          </button>
+          <div class="todo-form">
+            <input
+              type="text"
+              class="add-todo-input"
+              placeholder="Add new todo..."
+              required
+            />
+            <input
+              type="text"
+              class="add-todo-description"
+              placeholder="Description (optional)..."
+            />
+            <input type="date" class="add-todo-date" />
+            <button class="add-todo-btn">
+              <svg class="icon">
+                <use href="#icon-plus"></use>
+              </svg>
+              Add
+            </button>
+          </div>
         </section>
         <div class="main-content"></div>
       </main>

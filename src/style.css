@@ -133,16 +133,51 @@ main {
   align-items: center;
 }
 
-.add-todo-input {
-  flex: 1;
-  padding: 0.5rem 1rem;
-  background-color: transparent;
-  border: none;
-  border-bottom: 2px solid #ff8800;
-  box-shadow: 0 2px 0 0 #ff8800;
-  transition: box-shadow 0.3s ease;
-  font-size: 1rem;
+.add-todo-section {
+  padding: 1.5rem;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 16px;
+  margin-bottom: 1.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.todo-form {
+  display: grid;
+  grid-template-columns: 2fr 2fr 1fr auto;
+  gap: 0.75rem;
+  align-items: center;
+}
+
+.add-todo-input,
+.add-todo-description,
+.add-todo-date {
+  padding: 0.75rem 1rem;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  color: #333;
+  font-size: 0.9rem;
+  transition: all 0.2s ease;
+}
+
+.add-todo-input:focus,
+.add-todo-description:focus,
+.add-todo-date:focus {
   outline: none;
+  border-color: #ff8800;
+  background: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 0 0 3px rgba(255, 136, 0, 0.1);
+}
+
+.add-todo-input::placeholder,
+.add-todo-description::placeholder {
+  color: #888;
+}
+
+.add-todo-date {
+  color: #666;
+  cursor: pointer;
 }
 
 .add-todo-btn {
@@ -158,7 +193,9 @@ main {
 }
 
 .add-todo-btn:hover {
-  background-color: #ff6f00;
+  background: linear-gradient(135deg, #ff6b00, #ff5500);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(255, 136, 0, 0.3);
 }
 
 .main-content {

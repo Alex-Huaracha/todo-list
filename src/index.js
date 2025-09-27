@@ -79,7 +79,6 @@ function handleTogglePriority(todo) {
 }
 
 function handleEditTodo(todo) {
-  // Implementar modal o prompt para editar
   const newTitle = prompt('Enter new title:', todo.title);
   if (newTitle && newTitle.trim()) {
     todo.updateDetails({ title: newTitle.trim() });
@@ -216,22 +215,35 @@ function setupNavigation() {
 function setupTodoForm() {
   const addTodoBtn = document.querySelector('.add-todo-btn');
   const addTodoInput = document.querySelector('.add-todo-input');
+  const addTodoDescription = document.querySelector('.add-todo-description');
+  const addTodoDate = document.querySelector('.add-todo-date');
 
   addTodoBtn?.addEventListener('click', () => {
     const title = addTodoInput.value.trim();
     if (title) {
       handleCreateTodo({
         title,
-        description: '',
-        dueDate: '',
+        description: addTodoDescription.value.trim(),
+        dueDate: addTodoDate.value,
         priority: false,
       });
+
+      // Clear form
       addTodoInput.value = '';
+      addTodoDescription.value = '';
+      addTodoDate.value = '';
+    }
+  });
+
+  // Add Enter key support for quick todo creation
+  addTodoInput?.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') {
+      addTodoBtn.click();
     }
   });
 }
 
-setupNavigation(); // ← Agregar esta línea
+setupNavigation();
 setupTodoForm();
 
 renderUI();
