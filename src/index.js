@@ -97,6 +97,12 @@ function handleDeleteTodo(todo) {
   }
 }
 
+setupProjectModal((projectName) => {
+  manager.createProject(projectName);
+  manager.save();
+  renderUI();
+});
+
 // ==================== UI RENDERING ====================
 function renderUI(currentProject = null) {
   if (currentProject) {
@@ -139,11 +145,5 @@ function setupTodoForm() {
 }
 
 setupTodoForm();
-
-setupProjectModal((projectName) => {
-  manager.createProject(projectName);
-  manager.save();
-  renderUI();
-});
 
 renderUI();

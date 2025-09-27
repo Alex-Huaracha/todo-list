@@ -52,6 +52,13 @@ function createTodoItem(todo, options = {}) {
   const content = document.createElement('div');
   content.className = 'todo-content';
 
+  if (todo.priority) {
+    const priorityBadge = document.createElement('span');
+    priorityBadge.className = 'priority-badge';
+    priorityBadge.textContent = 'Important';
+    content.appendChild(priorityBadge);
+  }
+
   const title = document.createElement('h4');
   title.textContent = todo.title;
 

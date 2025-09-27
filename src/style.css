@@ -314,3 +314,28 @@ main {
   background-color: var(--primary-color, #3498db);
   color: white;
 }
+
+/* Priority Badge */
+.priority-badge {
+  display: inline-block;
+  background-color: #ffc107;
+  color: #000;
+  font-size: 0.75rem;
+  font-weight: bold;
+  padding: 0.125rem 0.5rem;
+  border-radius: 12px;
+  margin-bottom: 0.25rem;
+}
+
+.priority-btn {
+  color: #ccc;
+  transition: color 0.2s ease;
+}
+
+.priority-btn.priority-active .icon {
+  fill: #ffc107;
+}
+
+.todo-item.priority {
+  border-left: 4px solid #ffc107;
+}
