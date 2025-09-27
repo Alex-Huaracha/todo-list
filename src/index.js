@@ -210,11 +210,17 @@ function getAllTodosFromAllProjects() {
   let allTodos = [];
 
   allProjects.forEach(({ name, project }) => {
-    const projectTodos = project.getAllTodos().map((todo) => ({
-      ...todo,
-      projectName: name,
-    }));
-    allTodos = allTodos.concat(projectTodos);
+    project.getAllTodos().forEach((todo) => {
+      const originalProjectName = todo.projectName;
+      todo.projectName = name;
+      allTodos.push(todo);
+
+      if (originalProjectName) {
+        todo.projectName = originalProjectName;
+      } else {
+        delete todo.projectName;
+      }
+    });
   });
 
   return allTodos;
