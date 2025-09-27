@@ -38,17 +38,17 @@ function createTodoItem(todo, options = {}) {
     todo.priority ? 'priority' : ''
   }`;
 
-  const info = document.createElement('div');
-  info.className = 'todo-info';
-
+  // Checkbox
   const checkbox = document.createElement('input');
   checkbox.type = 'checkbox';
+  checkbox.className = 'todo-checkbox';
   checkbox.checked = todo.completed;
   checkbox.addEventListener('change', () => {
     todo.toggleCompletion();
     div.classList.toggle('completed', todo.completed);
   });
 
+  // Content section (Title/Details)
   const content = document.createElement('div');
   content.className = 'todo-content';
 
@@ -60,16 +60,20 @@ function createTodoItem(todo, options = {}) {
   }
 
   const title = document.createElement('h4');
+  title.className = 'todo-title';
   title.textContent = todo.title;
-
-  const details = document.createElement('div');
-  details.className = 'todo-details';
+  content.appendChild(title);
 
   if (todo.description) {
     const description = document.createElement('p');
+    description.className = 'todo-description';
     description.textContent = todo.description;
-    details.appendChild(description);
+    content.appendChild(description);
   }
+
+  // Date section
+  const dateSection = document.createElement('div');
+  dateSection.className = 'todo-date-section';
 
   if (todo.dueDate) {
     const date = document.createElement('span');
@@ -79,14 +83,8 @@ function createTodoItem(todo, options = {}) {
     } catch {
       date.textContent = todo.dueDate;
     }
-    details.appendChild(date);
+    dateSection.appendChild(date);
   }
-
-  content.appendChild(title);
-  content.appendChild(details);
-
-  info.appendChild(checkbox);
-  info.appendChild(content);
 
   // Actions
   const actions = todoActions(
@@ -96,7 +94,10 @@ function createTodoItem(todo, options = {}) {
     () => onDeleteTodo?.(todo)
   );
 
-  div.appendChild(info);
+  // Append in order: checkbox | content | date | actions
+  div.appendChild(checkbox);
+  div.appendChild(content);
+  div.appendChild(dateSection);
   div.appendChild(actions);
 
   return div;
