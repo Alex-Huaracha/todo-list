@@ -48,7 +48,6 @@ export function renderProjects(manager, options = {}) {
 
     if (name !== 'Default') {
       const actions = projectActions(
-        project,
         () => onEditProject?.(project),
         () => onDeleteProject?.(project)
       );
