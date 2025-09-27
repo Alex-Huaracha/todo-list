@@ -31,7 +31,12 @@ function todoActions(todo, onPriority, onEdit, onDelete) {
 }
 
 function createTodoItem(todo, options = {}) {
-  const { onTogglePriority, onEditTodo, onDeleteTodo } = options;
+  const {
+    onTogglePriority,
+    onEditTodo,
+    onDeleteTodo,
+    showProjectName = false,
+  } = options;
 
   const div = document.createElement('div');
   div.className = `todo-item ${todo.completed ? 'completed' : ''} ${
@@ -51,6 +56,13 @@ function createTodoItem(todo, options = {}) {
   // Content section (Title/Details)
   const content = document.createElement('div');
   content.className = 'todo-content';
+
+  if (showProjectName && todo.projectName) {
+    const projectBadge = document.createElement('span');
+    projectBadge.className = 'project-badge';
+    projectBadge.textContent = todo.projectName;
+    content.appendChild(projectBadge);
+  }
 
   if (todo.priority) {
     const priorityBadge = document.createElement('span');

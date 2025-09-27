@@ -127,22 +127,20 @@ function renderUI(currentProject = null) {
 
 // ==================== FILTER HANDLERS ====================
 function handleTodayFilter() {
-  const currentProject = manager.getCurrentProject();
   const today = new Date().toISOString().split('T')[0]; // YYYY-MM-DD format
 
-  const todayTodos = currentProject
-    .getAllTodos()
-    .filter((todo) => todo.dueDate === today);
+  const allTodos = getAllTodosFromAllProjects();
+  const todayTodos = allTodos.filter((todo) => todo.dueDate === today);
 
   renderFilteredTodos(todayTodos, 'Today');
   updateActiveFilter('today');
 }
 
 function handleUpcomingFilter() {
-  const currentProject = manager.getCurrentProject();
   const today = new Date();
 
-  const upcomingTodos = currentProject.getAllTodos().filter((todo) => {
+  const allTodos = getAllTodosFromAllProjects();
+  const upcomingTodos = allTodos.filter((todo) => {
     if (!todo.dueDate) return false;
     const todoDate = new Date(todo.dueDate);
     return todoDate > today;
@@ -153,8 +151,8 @@ function handleUpcomingFilter() {
 }
 
 function handleCompletedFilter() {
-  const currentProject = manager.getCurrentProject();
-  const completedTodos = currentProject.getCompletedTodos();
+  const allTodos = getAllTodosFromAllProjects();
+  const completedTodos = allTodos.filter((todo) => todo.completed);
 
   renderFilteredTodos(completedTodos, 'Completed');
   updateActiveFilter('completed');
@@ -163,6 +161,21 @@ function handleCompletedFilter() {
 function handleAllTodos() {
   renderUI();
   updateActiveFilter('all');
+}
+
+function getAllTodosFromAllProjects() {
+  const allProjects = manager.getAllProjects();
+  let allTodos = [];
+
+  allProjects.forEach(({ name, project }) => {
+    const projectTodos = project.getAllTodos().map((todo) => ({
+      ...todo,
+      projectName: name,
+    }));
+    allTodos = allTodos.concat(projectTodos);
+  });
+
+  return allTodos;
 }
 
 function updateActiveFilter(activeFilter) {
@@ -192,6 +205,7 @@ function renderFilteredTodos(todos, filterName) {
       onTogglePriority: handleTogglePriority,
       onEditTodo: handleEditTodo,
       onDeleteTodo: handleDeleteTodo,
+      showProjectName: true,
     });
     mainContent.appendChild(todoItem);
   });

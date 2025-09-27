@@ -492,3 +492,16 @@ main {
   border-radius: 12px;
   backdrop-filter: blur(8px);
 }
+
+.project-badge {
+  display: inline-block;
+  background-color: #6c757d;
+  color: white;
+  font-size: 0.7rem;
+  font-weight: bold;
+  padding: 0.2rem 0.5rem;
+  border-radius: 12px;
+  margin-bottom: 0.25rem;
+  margin-right: 0.5rem;
+  width: fit-content;
+}
