@@ -2,11 +2,14 @@ import './reset.css';
 import './style.css';
 
 import ProjectManager from './modules/projectManager';
-import { renderProjects } from './dom/renderProjects.js';
 import { renderTodos } from './dom/renderTodos.js';
 import { seedDefaultData } from './modules/seedData.js';
-import { setupProjectModal } from './dom/projectForm.js';
-import { setupProjectEvents } from './dom/projectEvents.js';
+
+import {
+  renderProjects,
+  setupProjectModal,
+  setupProjectEvents,
+} from './dom/projects.js';
 
 // Load SVG icons and insert them into the DOM
 fetch('assets/icons.svg')
