@@ -54,6 +54,7 @@ function handleEditProject(project) {
 }
 
 function handleProjectSelect(project) {
+  showAddTodoForm();
   renderUI(project);
 }
 
@@ -103,6 +104,41 @@ setupProjectModal((projectName) => {
   renderUI();
 });
 
+// ==================== UI UTILITIES ====================
+function hideAddTodoForm() {
+  const addTodoSection = document.querySelector('.add-todo-section');
+  if (addTodoSection) {
+    addTodoSection.style.display = 'none';
+  }
+}
+
+function showAddTodoForm() {
+  const addTodoSection = document.querySelector('.add-todo-section');
+  if (addTodoSection) {
+    addTodoSection.style.display = 'flex';
+  }
+}
+
+function updateActiveFilter(activeFilter) {
+  // Remove active class from all nav buttons
+  document.querySelectorAll('.nav-btn').forEach((btn) => {
+    btn.classList.remove('active');
+  });
+
+  // Add active class to current filter
+  const filterBtn = document.querySelector(`[data-filter="${activeFilter}"]`);
+  if (filterBtn) {
+    filterBtn.classList.add('active');
+  }
+
+  // Remove active class from project buttons when using filters
+  if (activeFilter !== 'all') {
+    document.querySelectorAll('.projects-nav .nav-btn').forEach((btn) => {
+      btn.classList.remove('active');
+    });
+  }
+}
+
 // ==================== UI RENDERING ====================
 function renderUI(currentProject = null) {
   if (currentProject) {
@@ -123,15 +159,18 @@ function renderUI(currentProject = null) {
     onEditTodo: handleEditTodo,
     onDeleteTodo: handleDeleteTodo,
   });
+
+  showAddTodoForm();
 }
 
 // ==================== FILTER HANDLERS ====================
 function handleTodayFilter() {
-  const today = new Date().toISOString().split('T')[0]; // YYYY-MM-DD format
+  const today = new Date().toISOString().split('T')[0];
 
   const allTodos = getAllTodosFromAllProjects();
   const todayTodos = allTodos.filter((todo) => todo.dueDate === today);
 
+  hideAddTodoForm();
   renderFilteredTodos(todayTodos, 'Today');
   updateActiveFilter('today');
 }
@@ -146,6 +185,7 @@ function handleUpcomingFilter() {
     return todoDate > today;
   });
 
+  hideAddTodoForm();
   renderFilteredTodos(upcomingTodos, 'Upcoming');
   updateActiveFilter('upcoming');
 }
@@ -154,11 +194,13 @@ function handleCompletedFilter() {
   const allTodos = getAllTodosFromAllProjects();
   const completedTodos = allTodos.filter((todo) => todo.completed);
 
+  hideAddTodoForm();
   renderFilteredTodos(completedTodos, 'Completed');
   updateActiveFilter('completed');
 }
 
 function handleAllTodos() {
+  showAddTodoForm();
   renderUI();
   updateActiveFilter('all');
 }
@@ -176,19 +218,6 @@ function getAllTodosFromAllProjects() {
   });
 
   return allTodos;
-}
-
-function updateActiveFilter(activeFilter) {
-  // Remove active class from all nav buttons
-  document.querySelectorAll('.nav-btn').forEach((btn) => {
-    btn.classList.remove('active');
-  });
-
-  // Add active class to current filter
-  const filterBtn = document.querySelector(`[data-filter="${activeFilter}"]`);
-  if (filterBtn) {
-    filterBtn.classList.add('active');
-  }
 }
 
 function renderFilteredTodos(todos, filterName) {
